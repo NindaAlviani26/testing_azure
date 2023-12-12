@@ -1,0 +1,19 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {{formtitle}}
+        </h3>
+    </div>
+    <div class="box-body">
+        <h4>Data Original</h4>
+        <table id="{{idTable1}}"></table>
+        <div id="pager{{idTable1}}"></div>
+
+        <hr/>
+
+        <h4>Data Ready Sync</h4>
+        <button  id="upload{{idTable2}}"  class="btn-upload" style="display:none"> <i class="glyphicon glyphicon-cloud-upload"></i></button>
+        <table id="{{idTable2}}"></table>
+        <div id="pager{{idTable2}}"></div>
+    </div>	 
+</div>

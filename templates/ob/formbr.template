@@ -1,0 +1,21 @@
+<style>
+.modal-backdrop {
+    z-index: 0 !important;
+}
+</style>
+
+<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title">
+			{{formtitle}}
+		</h3>
+	</div>
+	<div class="box-body">
+		<button id="upload{{idTable}}" class="btn-upload" style="display:none"> <i
+				class="glyphicon glyphicon-cloud-upload"></i></button>
+		<table id="{{idTable}}"></table>
+		<div id="pager{{idTable}}"></div>
+	</div>
+</div>
+
+

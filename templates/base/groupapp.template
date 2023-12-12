@@ -1,0 +1,22 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {{formtitle}}
+        </h3>
+    </div>
+    <div class="box-body">
+        <table id="{{idTable}}"></table>
+        <div id="pager{{idTable}}"></div>
+	</div>	 
+</div>
+<div class="box box-default">
+	<div class="box-header with-border">
+        <h3 class="box-title">
+            Original Data
+        </h3>
+    </div>
+	 <div class="box-body">
+        <table id="{{idTable2}}"></table>
+        <div id="pager{{idTable2}}"></div>
+	</div>
+</div>

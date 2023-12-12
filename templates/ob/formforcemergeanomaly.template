@@ -1,0 +1,13 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {{formtitle}}
+        </h3>
+        <button  id="upload{{idTable0}}"  class="btn-upload" style="float:right"> <i class="glyphicon glyphicon-cloud-upload"></i></button>
+        <button  id="download{{idTable0}}"  class="btn-download" style="float:right"> <i class="glyphicon glyphicon-cloud-download"></i></button>
+    </div>
+    <div class="box-body">
+        <table id="{{idTable0}}"></table>
+        <div id="pager{{idTable0}}"></div>
+    </div>	 
+</div>

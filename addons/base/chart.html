@@ -1,0 +1,182 @@
+<script src="./plugins/chart.js/2.4.0/Chart.bundle.js"></script>
+<script src="./plugins/chart.js/2.4.0/randomColor.js"></script>
+<script src="./plugins/chart.js/2.4.0/utils.js"></script>
+
+          <div class="box box-default box-success">
+            <div class="box-header with-border">
+              <h3 class="box-title">Monthly CKPN by Segment</h3> 
+            </div>
+            <div class="box-body">
+              <div class="chart">
+                <canvas id="barChart" style="height:400px"></canvas>
+              </div>
+            </div> 
+          </div> 
+		  
+<script type="text/javascript"> 
+/*
+	 var dataJson = '[
+	 {"rank":"2016-12","label":"KOMERSIAL","value":"3091498.259973"},
+	 {"rank":"2016-12","label":"MIKRO","value":"35398605133.4477"},
+	 {"rank":"2016-12","label":"JF","value":"3276870178.70397"},
+	 {"rank":"2016-12","label":"KONSUMER","value":"574144655.244999"}
+	 ]';
+*/	 
+var xx = [];
+var dd = { "product":"KOMERSIAL", "data": [
+{"rank":"2016-01","label":"2016-01","value":"3191498.259973"},
+{"rank":"2016-02","label":"2016-02","value":"3291498.259973"},
+{"rank":"2016-03","label":"2016-03","value":"3391498.259973"},
+{"rank":"2016-04","label":"2016-04","value":"3491498.259973"},
+{"rank":"2016-05","label":"2016-05","value":"3591498.259973"},
+{"rank":"2016-06","label":"2016-06","value":"3691498.259973"},
+{"rank":"2016-07","label":"2016-07","value":"3791498.259973"},
+{"rank":"2016-08","label":"2016-08","value":"3891498.259973"},
+{"rank":"2016-09","label":"2016-09","value":"3991498.259973"},
+{"rank":"2016-10","label":"2016-10","value":"4091498.259973"},
+{"rank":"2016-11","label":"2016-11","value":"4191498.259973"},
+{"rank":"2016-12","label":"2016-12","value":"35398605133.259973"}
+]};
+var dd1 = { "product":"MIKRO", "data": [ 
+{"rank":"2016-01","label":"2016-01","value":"31198605133.259973"},
+{"rank":"2016-02","label":"2016-02","value":"32298605133.259973"},
+{"rank":"2016-03","label":"2016-03","value":"33398605133.259973"},
+{"rank":"2016-04","label":"2016-04","value":"34498605133.259973"},
+{"rank":"2016-05","label":"2016-05","value":"35598605133.259973"},
+{"rank":"2016-06","label":"2016-06","value":"36698605133.259973"},
+{"rank":"2016-07","label":"2016-07","value":"37798605133.259973"},
+{"rank":"2016-08","label":"2016-08","value":"38898605133.259973"},
+{"rank":"2016-09","label":"2016-09","value":"39998605133.259973"},
+{"rank":"2016-10","label":"2016-10","value":"40098605133.259973"},
+{"rank":"2016-11","label":"2016-11","value":"41198605133.4477"},
+{"rank":"2016-12","label":"2016-12","value":"36298605133.4477"}
+]};
+var dd2 = { "product":"JF", "data": [ 
+{"rank":"2016-01","label":"2016-01","value":"3116870178.259973"},
+{"rank":"2016-02","label":"2016-02","value":"3226870178.259973"},
+{"rank":"2016-03","label":"2016-03","value":"3336870178.259973"},
+{"rank":"2016-04","label":"2016-04","value":"3446870178.259973"},
+{"rank":"2016-05","label":"2016-05","value":"3556870178.259973"},
+{"rank":"2016-06","label":"2016-06","value":"3666870178.259973"},
+{"rank":"2016-07","label":"2016-07","value":"3776870178.259973"},
+{"rank":"2016-08","label":"2016-08","value":"3886870178.259973"},
+{"rank":"2016-09","label":"2016-09","value":"3996870178.259973"},
+{"rank":"2016-10","label":"2016-10","value":"4006870178.259973"},
+{"rank":"2016-11","label":"2016-11","value":"4116870178.4477"},
+{"rank":"2016-12","label":"2016-12","value":"3296870178.4477"}
+]};
+var dd3 = { "product":"KONSUMER", "data": [ 
+{"rank":"2016-01","label":"2016-01","value":"511144655.259973"},
+{"rank":"2016-02","label":"2016-02","value":"522144655.259973"},
+{"rank":"2016-03","label":"2016-03","value":"533144655.259973"},
+{"rank":"2016-04","label":"2016-04","value":"544144655.259973"},
+{"rank":"2016-05","label":"2016-05","value":"555144655.259973"},
+{"rank":"2016-06","label":"2016-06","value":"566144655.259973"},
+{"rank":"2016-07","label":"2016-07","value":"577144655.259973"},
+{"rank":"2016-08","label":"2016-08","value":"588144655.259973"},
+{"rank":"2016-09","label":"2016-09","value":"599144655.259973"},
+{"rank":"2016-10","label":"2016-10","value":"600144655.259973"},
+{"rank":"2016-11","label":"2016-11","value":"611144655.4477"},
+{"rank":"2016-12","label":"2016-12","value":"574144655.4477"}
+]};
+/*
+	$.ajax({
+		type: 'GET',
+		url: "./addons/test/loaddatads.php",
+		mimeType : "application/json",
+		data: '',
+		async: false,
+		dataType: 'json',
+		success: function (data) {
+			loadChart(data);
+		}
+	});
+*/		
+xx.push(dd);
+xx.push(dd1);
+xx.push(dd2);
+xx.push(dd3);
+	function loadChart(data) 
+	{
+		var xx = data;
+		var json = JSON.stringify(xx, null, "");   
+		var obj = JSON.parse(json);  
+		//prod = obj.product;
+		var xLabels=[];
+		var xDataSet=[];
+		var xColor=[];
+
+		//Set Color
+		for(i=0;i<obj.length;i++){ 
+		  x=randomColor({hue: 'random',luminosity: 'semi',count: 4});
+		  xColor.push(x[0]);
+		} 
+
+		//Set Label
+		for(j=0;j<obj[0].data.length;j++){ 
+		  xLabels.push(obj[0].data[j].rank);
+		}
+		console.log(xLabels);
+		for(i=0;i<obj.length;i++){ 
+		   var datas="";
+		   var xData=[];   
+		   var xLabel=[];
+		   for(j=0;j<obj[i].data.length;j++){  
+				xData.push(obj[i].data[j].value);
+				xLabel.push(obj[i].data[j].label);
+		   }
+			
+		   datas={ label: obj[i].product, backgroundColor:xColor[i] , "labels": xLabel, "data":xData};
+		   xDataSet.push(datas);
+		}	  
+			
+		var ctx = document.getElementById("barChart").getContext('2d'); 
+		var myChart = new Chart(ctx, {
+		  type: 'bar', 
+		  tooltipFillColor: "rgba(0,0,0,0.8)",                
+		  options: {	
+						scales: {
+							xAxes: [{
+								ticks: {
+									fontSize: 12
+								}
+							}]
+						},
+						responsive: true,
+							title: {
+								display: true,
+								//text: 'TOP TEN Customer'
+							}, 
+						tooltips: {
+							callbacks: {
+								title: function (tooltipItem, data) {  
+								//alert(tooltipItems.yLabel);
+								//alert(tooltipItem.index);
+								return 'Nasabah : ' + data.labels[tooltipItem[0].index] ; },
+								label: function (tooltipItem, data) {
+									//var amount = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+									var amount = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+									var total = eval(data.datasets[tooltipItem.datasetIndex].data.join("+"));
+									//var amount1 = amount.toString();
+									var amount1 = amount.substr(0,amount.indexOf(".")+3);
+									total1 = total.toString();
+									total2 = total1.substr(0,total1.indexOf(".")+3);
+									//alert (total + "   " + total1.substr(0,total1.indexOf(".")+3));
+									//alert (amount1 + "  " + amount.substr(0,amount.indexOf(".")+2));
+									return data.datasets[tooltipItem.datasetIndex].labels[tooltipItem.index]+ ' => ' + amount1 + ' / ' + total2 + ' ( ' + parseFloat(amount * 100 / total).toFixed(2) + '% )';
+								},
+								//footer: function(tooltipItem, data) { return 'Total: 100 planos.'; }
+							}
+						},
+					},
+		  data: {
+			fill: false,
+			borderWidth: 2,
+			labels: xLabels,
+			datasets: xDataSet
+		  }
+		}); 
+		//var caption = document.getElementById("caption");
+	 };
+    loadChart(xx) ;
+</script>

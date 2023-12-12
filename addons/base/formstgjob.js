@@ -1,0 +1,678 @@
+
+function getForm(urlServer) {
+    $("#loading").removeClass('hide');
+    $.ajax({
+        beforeSend: function (xhr) { xhr.setRequestHeader('Authorization', "Bearer " + sessionStorage.token); },
+        url: urlServer,
+        dataType: "json",
+        method: "GET",
+        success: function (msg) {
+            $("#loading").addClass('hide');
+            if (msg.status == 'success') {
+
+                $.get("./templates/base/formstgjob.template?v=3", function (data) {
+                    var template = data.replaceAll("{{formtitle}}", msg.structure.formtitle);
+                    template = template.replaceAll("{{idTable}}", msg.structure.idTable);
+                    $("#mainContent").html(template);
+
+                    //data jqgrid js
+                    function checklength(value, minlength) {
+                        if (value.length == minlength) {
+                            return [true, "", ""];
+                        } else {
+                            return [false, "Minimum Length Jam Transaksi 4", ""];
+                        }
+                    }
+
+
+                    $("#" + msg.structure.idTable),
+                        initDateEdit = function (elem) {
+                            $(elem).datepicker({
+                                format: 'yyyy-mm-dd',
+                                // format: '<?php echo $format_date2;?>', 
+                                autoSize: true,
+                                changeYear: true,
+                                changeMonth: true,
+                                showButtonPanel: true,
+                                showWeek: true
+                            });
+                        },
+                        initDateSearch = function (elem) {
+                            setTimeout(function () {
+                                $(elem).datepicker({
+                                    format: 'yyyy-mm-dd',
+                                    // format: '<?php echo $format_date2;?>', 
+                                    autoSize: true,
+                                    changeYear: true,
+                                    changeMonth: true,
+                                    showWeek: true,
+                                    showButtonPanel: true
+                                });
+                            }, 100);
+                        };
+
+                    var gridimgpath = 'themes/basic/images';
+
+                    $.ajaxSetup({
+                        headers: {
+                            'Authorization': "Bearer " + sessionStorage.token
+                        }
+                    });
+
+                    jQuery("#" + msg.structure.idTable).jqGrid({
+                        url: msg.structure.urlLoadData,
+                        datatype: "json",
+                        mtype: "POST",
+                        cmTemplate: {
+                            editable: true,
+                            autoResizable: true
+                        },
+                        iconSet: "fontAwesome",
+                        guiStyle: "jquery",
+                        //styleUI : 'jQueryUI',
+                        styleUI: 'Bootstrap',
+                        colNames: eval('[' + msg.structure.colNames + ']'),
+                        colModel: eval('[' + msg.structure.colModel + ']'),
+                        rowNum: 10,
+                        autoResizing: {
+                            compact: true
+                        },
+                        rowList: [10, 20, 30, "10000:All"],
+                        imgpath: gridimgpath,
+                        autowidth: true,
+                        pager: '#pager' + msg.structure.idTable,
+                        toppager: true,
+                        sortname: msg.structure.sortname,
+                        sortorder: "asc",
+                        viewrecords: true,
+                        editurl: msg.structure.editurl,
+                        height: "auto",
+                        altRows: true,
+                        rownumbers: true,
+                        forceFit: false,
+                        shrinkToFit: false,
+                        toppager: true,
+                        rownumbers: true,
+                        colMenu: true,
+                        responsive: true,
+                        autowidth: true,
+                        hidegrid: true,
+                        loadComplete: function () {
+
+                            $(".runJob").on("click", function () {
+                                var id = $(this).data("id");
+                                $("#loading").removeClass("hide");
+                                $.ajax({
+                                    method: "GET",
+                                    url: msg.structure.getContextUrl + '?oper=runjob&id=' + id,
+                                    dataType: 'json',
+                                    success: function (msgrun) {
+                                        $("#loading").addClass("hide");
+                                        $("#" + msg.structure.idTable).trigger('reloadGrid');
+                                        // alert(msgrun.info);
+                                        $alert(msgrun.info);
+
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                        $("#loading").addClass("hide");
+                                        // alert("Job run error !!");
+                                        $alert("Job run error !!");
+                                    }
+                                });
+                            });
+
+                            $(".stopJob").on("click", function () {
+                                var id = $(this).data("id");
+                                $("#loading").removeClass("hide");
+                                $.ajax({
+                                    method: "GET",
+                                    url: msg.structure.getContextUrl + '?oper=stopjob&id=' + id,
+                                    dataType: 'json',
+                                    success: function (msgrun) {
+                                        $("#loading").addClass("hide");
+                                        $("#" + msg.structure.idTable).trigger('reloadGrid');
+                                        // alert(msgrun.info);
+                                        $alert(msgrun.info);
+
+                                    },
+                                    error: function (err) {
+                                        console.log(err);
+                                        $("#loading").addClass("hide");
+                                        // alert("Job stop error !!");
+                                        $alert("Job stop error !!");
+                                    }
+                                });
+                            });
+                        },
+                        //multiselect: true, 
+                        ondblClickRow: function (rowid) {
+                            $("#" + msg.structure.idTable).jqGrid('viewGridRow', rowid, {
+                                width: 600,
+                                recreateForm: true,
+                                reloadAfterSubmit: true,
+                                jqModal: true,
+                                closeOnEscape: true,
+                                bottominfo: "Fields marked with (*) are required",
+                                processData: "Processing ...",
+                                beforeShowForm: function (formid) {
+                                    eval(msg.structure.viewDetailGrid);
+                                }
+                            });
+
+                        },
+                        onSelectRow: function (ids) {
+                            var loadingPage = '<tr><td colspan="2" class="text-center"> Loading . . . </td></tr>';
+                            $(".contextParamValues").html(loadingPage);
+                            $(".contextJavaParam").html(loadingPage);
+
+                            $.ajax({
+                                method: "GET",
+                                url: msg.structure.getContextUrl + '?oper=get&id=' + ids,
+                                dataType: 'json',
+                                success: function (msg) {
+
+                                    $(".contextParamValues").html(msg.info);
+                                    $(".contextJavaParam").html(msg.jvminfo);
+
+                                    var onEdit = false;
+                                    $(".editParam td .fa").on("click", function () {
+                                        if (onEdit) {
+                                            $(this).removeClass("fa-unlock");
+                                            $(this).addClass("fa-lock");
+                                            $(this).css("color", "red");
+                                            $(this).closest('.editParam').children('.editTD').children('.parameterTalend').attr("readonly", true);
+
+                                        } else {
+                                            $(this).removeClass("fa-lock");
+                                            $(this).addClass("fa-unlock");
+                                            $(this).css("color", "green");
+                                            $(this).closest('.editParam').children('.editTD').children('.parameterTalend').attr("readonly", false);
+                                        }
+                                        onEdit = !onEdit;
+
+                                    });
+
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                }
+                            });
+
+                        }
+                    }).jqGrid('navGrid', '#pager' + msg.structure.idTable, {
+                        excel: true,
+                        search: true,
+                        view: eval(msg.structure.viewpermission),
+                        edit: eval(msg.structure.editpermission),
+                        add: eval(msg.structure.addpermission),
+                        del: eval(msg.structure.delpermission),
+                        refresh: true,
+                        cloneToTop: true,
+                        help: true
+                    }, {
+                        width: '600',
+                        dataheight: '360px',
+                        recreateForm: false,
+                        reloadAfterSubmit: true,
+                        closeAfterEdit: true,
+                        jqModal: true,
+                        modal: true,
+                        closeOnEscape: true,
+                        bottominfo: "Fields marked with (*) are required",
+                        processData: "Processing ...",
+                        onInitializeForm: function (formid) {
+                            eval(msg.structure.hiddenForm);
+                        },
+                        beforeShowForm: function (formid) {
+                            eval(msg.structure.hiddenForm);
+                            eval(msg.structure.canotedited);
+                            //$("#tr_FRNPEMINJAM",id).hide(); 
+                        },
+                        beforeSubmit: function (postdata, formid, oper) {
+                            var datapost = JSON.stringify(postdata);
+                            var result;
+                            datapost = datapost.substr(0, datapost.length - 1) + ',"oper":"' + oper + '", "form":"' + msg.structure.formidx0 + '", "m":"' + msg.structure.module + '","p":"' + msg.structure.prefixtbl + '"}';
+                            result = $.ajax({
+                                type: "POST",
+                                async: false,
+                                url: msg.structure.urlValidate,
+                                data: JSON.parse(datapost),
+                                dataType: "json",
+                                timeout: 2000
+                            }).done(function (msg) {
+                                return msg;
+                            }).responseJSON;
+
+
+                            if (result.error == "0") {
+                                return [true, "", ""];
+                            }
+                            else {
+                                // alert(result.message);
+                                $alert(result.message);
+                                return [false, result.message, ""];
+                            }
+                        },
+                        afterSubmit: function (serverResponse, postdata) {
+                            if ($.trim(serverResponse.responseText) == '0') {
+                                return [true, "", ""];
+                            }
+                            if ($.trim(serverResponse.responseText) != '0') {
+                                var result = JSON.parse(serverResponse.responseText);
+                                if (result.status == "success") {
+                                    sessionStorage.setItem("token", result.token.refresh);
+                                    // alert(result.info);
+                                    $alert(result.info);
+                                } else {
+                                    // alert(result.info);
+                                    $alert(result.info);
+                                }
+                                return false;
+                            }
+                        }
+                    }, //edit
+                        {
+                            width: '600',
+                            dataheight: '360px',
+                            recreateForm: true,
+                            reloadAfterSubmit: true,
+                            closeAfterAdd: true,
+                            checkOnSubmit: true,
+                            jqModal: true,
+                            modal: true,
+                            closeOnEscape: true,
+                            bottominfo: "Fields marked with (*) are required",
+                            onInitializeForm: function (formid) {
+                                eval(msg.structure.hiddenForm);
+                            },
+                            onclickSubmit: function (params, postdata) {
+                                return true;
+                            },
+                            beforeSubmit: function (postdata, formid, oper) {
+                                var datapost = JSON.stringify(postdata);
+                                var result;
+                                datapost = datapost.substr(0, datapost.length - 1) + ',"oper":"' + oper + '", "form":"' + msg.structure.formidx0 + '", "m":"' + msg.structure.module + '","p":"' + msg.structure.prefixtbl + '"}';
+                                result = $.ajax({
+                                    type: "POST",
+                                    async: false,
+                                    url: msg.structure.urlValidate,
+                                    data: JSON.parse(datapost),
+                                    dataType: "json",
+                                    timeout: 2000
+                                }).done(function (msg) {
+                                    return msg;
+                                }).responseJSON;
+
+
+                                if (result.error == "0") {
+                                    return [true, "", ""];
+                                }
+                                else {
+                                    // alert(result.message);
+                                    $alert(result.message);
+                                    return [false, result.message, ""];
+                                }
+                            },
+                            afterSubmit: function (serverResponse, xhr, postdata) {
+                                var result = JSON.parse(serverResponse.responseText);
+                                if (result.status == "success") {
+                                    sessionStorage.setItem("token", result.token.refresh);
+                                    // alert(result.info);
+                                    $alert(result.info);
+                                } else {
+                                    $alert(result.info);
+                                }
+                                return [true, "", ""];
+                            }
+
+                        }, //add
+                        {
+                            width: '300',
+                            dataheight: '150px',
+                            recreateForm: false,
+                            reloadAfterSubmit: true,
+                            jqModal: true,
+                            closeOnEscape: true,
+                            onclickSubmit: function (eparams) {
+                                var retarr = {}; // we can use all the grid methods here //to obtain some data 
+                                var sr = jQuery("#" + msg.structure.idTable).jqGrid('getGridParam', 'selrow');
+                                primarykey = jQuery("#" + msg.structure.idTable).jqGrid('getCell', jQuery("#" + msg.structure.idTable).jqGrid('getGridParam', 'selrow'), msg.structure.keyfield);
+                                retarr = eval("{" + msg.structure.keyfield + " : " + primarykey + "}");
+                                return retarr;
+                            },
+                            afterSubmit: function (serverResponse, xhr, postdata) {
+
+                                var result = JSON.parse(serverResponse.responseText);
+                                if (result.status == "success") {
+                                    sessionStorage.setItem("token", result.token.refresh);
+                                    // alert(result.info);
+                                    $alert(result.info);
+                                } else {
+                                    // alert(result.info);
+                                    $alert(result.info);
+                                }
+                                return [true, "", ""];
+                            }
+                        } //del
+                        , {
+                            multipleSearch: true,
+                            multipleGroup: true,
+                            showQuery: false
+                        } //Search
+                        , {
+                            width: '600',
+                            dataheight: '360px',
+                            recreateForm: false,
+                            reloadAfterSubmit: true,
+                            jqModal: true,
+                            modal: true,
+                            closeOnEscape: true,
+                            bottominfo: "Fields marked with (*) are required",
+                            processData: "Processing ..."
+                        }, //View, 
+                        {
+                            width: '600',
+                            dataheight: '360px',
+                            recreateForm: false,
+                            reloadAfterSubmit: true,
+                            jqModal: true,
+                            modal: true,
+                            closeOnEscape: true,
+                            bottominfo: "Fields marked with (*) are required",
+                            processData: "Processing ...",
+                            helppdffile: msg.structure.urlhelpfile,
+                            helppage: msg.structure.helppage,
+                            helptext: msg.structure.helpheadertitle
+                        } //Help,
+                    );
+
+
+
+
+                    jQuery('#' + msg.structure.idTable + '_toppager_center').remove();
+                    jQuery('#' + msg.structure.idTable + '_toppager_right').remove();
+                    jQuery('#pager' + msg.structure.idTable + '_left').remove();
+
+                    $('#' + msg.structure.idTable + '').jqGrid("navSeparatorAdd", "#pg_" + msg.structure.idTable + "_toppager", {
+                        sepclass: 'ui-separator', sepcontent: ''
+                    });
+
+
+                    //add button upload
+
+                    $('#' + msg.structure.idTable + '').jqGrid("navButtonAdd", "#pg_" + msg.structure.idTable + "_toppager", {
+                        buttonicon: "glyphicon glyphicon-console",
+                        title: "Upload Job Talend",
+                        caption: "",
+                        position: "last",
+                        onClickButton: function () {
+
+                            primarykey = jQuery("#" + msg.structure.idTable).jqGrid('getCell', jQuery("#" + msg.structure.idTable).jqGrid('getGridParam', 'selrow'), msg.structure.keyfield);
+                            if (primarykey != '') {
+
+
+                                $('#ModalJobUpload').modal('show');
+
+                            } else {
+                                // alert("Please select row !!");
+                                $alert("Please select row !!");
+                            }
+
+                        }
+                    });
+
+
+                    $('.uploadJob').on('click', function () {
+
+                        primarykey = jQuery("#" + msg.structure.idTable).jqGrid('getCell', jQuery("#" + msg.structure.idTable).jqGrid('getGridParam', 'selrow'), msg.structure.keyfield);
+                        var file_data = $('#file').prop('files')[0];
+                        var form_data = new FormData();
+                        if (typeof file_data !== 'undefined') {
+                            $('.uploadJob').attr("disabled", true);
+                            $('.uploadJob').html("process . . .");
+                            form_data.append('file', file_data);
+
+                            $.ajax({
+                                xhr: function () {
+                                    var xhr = new window.XMLHttpRequest();
+
+                                    xhr.upload.addEventListener("progress", function (evt) {
+                                        if (evt.lengthComputable) {
+                                            var progress = (evt.loaded / evt.total) * 100;
+
+                                            $(".progressUpload").css("width", progress + "%");
+                                        }
+                                    }, false);
+
+                                    return xhr;
+                                },
+                                url: msg.structure.uploadJobUrl, // <-- point to server-side PHP script 
+                                dataType: 'json',  // <-- what to expect back from the PHP script, if anything
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                data: form_data,
+                                type: 'post',
+                                success: function (respon) {
+                                    if (respon.status == 'success') {
+
+                                        $('.uploadJob').html("extract zip  . . .");
+                                        $.ajax({
+                                            method: "GET",
+                                            url: msg.structure.processJobUrl + '&fileName=' + file_data.name + "&idJob=" + primarykey,
+                                            dataType: 'json',
+                                            success: function (msgUpload2) {
+
+                                                console.log(msgUpload2);
+                                                $("#loading").addClass('hide');
+                                                if (msgUpload2.status == "success") {
+                                                    $("#" + msg.structure.idTable).trigger('reloadGrid');
+                                                    sessionStorage.setItem("token", msgUpload2.token.refresh);
+                                                    $alert(msgUpload2.info);
+                                                    $('#ModalJobUpload').modal('hide');
+                                                } else {
+                                                    // alert(msgUpload2.info);
+                                                    $alert(msgUpload2.info);
+                                                }
+
+
+                                                $('.uploadJob').attr("disabled", false);
+                                                $('.uploadJob').html("Upload");
+                                                $(".progressUpload").css("width", "0%");
+                                                return [true, "", ""];
+                                                // end replace session
+
+
+                                            },
+                                            error: function (errUpload2) {
+                                                status = 'error';
+                                                console.log(errUpload2);
+                                                $("#loading").addClass('hide');
+
+                                                $('.uploadJob').attr("disabled", false);
+                                                $('.uploadJob').html("Upload");
+                                                $(".progressUpload").css("width", "0%");
+                                                $alert("JOB Extract error !!");
+                                            }
+                                        });
+                                    } else {
+
+                                        $('.uploadJob').attr("disabled", false);
+                                        $('.uploadJob').html("Upload");
+                                        $(".progressUpload").css("width", "0%");
+                                        $alert("Error upload : " + respon.info);
+                                    }
+                                },
+                                error: function (err) {
+                                    console.log(err);
+                                    $alert("Error upload : " + err.statusText);
+                                    $('.uploadJob').attr("disabled", false);
+                                    $('.uploadJob').html("Upload");
+                                    $(".progressUpload").css("width", "0%");
+                                }
+                            });
+                        } else {
+                            $alert("Please select job before process !!");
+                        }
+
+                    });
+
+
+
+                    // r.assignBrowse(document.getElementById('uploadFile'));
+                    // // r.assignBrowse(document.getElementsByClassName('glyphicon-cloud-upload'));
+
+                    // if (!r.support) {
+                    //     $('.resumable-error').show();
+                    // } else {
+                    //     r.on('fileAdded', function (file) {
+                    //         $("#loading").removeClass('hide');
+                    //         r.upload();
+                    //     });
+                    //     r.on('fileSuccess', function (file, message) {
+                    // $.ajax({
+                    //     method: "GET",
+                    //     url: msg.structure.processJobUrl + '&fileName=' + file.fileName + "&idJob=" + primarykey,
+                    //     dataType: 'json',
+                    //     success: function (msgUpload2) {
+
+                    //         console.log(msgUpload2);
+                    //         $("#loading").addClass('hide');
+                    //         // alert(msgUpload2.info);
+                    //         // $("#" + msg.structure.idTable).trigger('reloadGrid');
+
+                    //         // replace session
+                    //         if (msgUpload2.status == "success") {
+                    //             $("#"+msg.structure.idTable).trigger('reloadGrid');
+                    //             sessionStorage.setItem("token", msgUpload2.token.refresh);
+                    //             // alert(msgUpload2.info);
+                    //             $alert(msgUpload2.info);
+                    //         } else {
+                    //             // alert(msgUpload2.info);
+                    //             $alert(msgUpload2.info);
+                    //         }
+                    //         return [true, "", ""];
+                    //         // end replace session
+
+                    //     },
+                    //     error: function (errUpload2) {
+                    //         status = 'error';
+                    //         console.log(errUpload2);
+                    //         $("#loading").addClass('hide');
+                    //         // alert("JOB Extract error !!");
+                    //         $alert("JOB Extract error !!");
+                    //     }
+                    // });
+                    //     });
+                    //     r.on('fileError', function (file, message) {
+                    //         // alert(message);
+                    //         $alert(message);
+                    //         $("#loading").addClass('hide');
+                    //     });
+                    // }
+
+                    //commit context propoerties job
+                    $(".btnCommitContext").on("click", function () {
+                        var dataContext = $(".formContext").serialize();
+                        var ids = jQuery("#" + msg.structure.idTable).jqGrid('getCell', jQuery("#" + msg.structure.idTable).jqGrid('getGridParam', 'selrow'), 'id');
+
+                        if (ids != '') {
+                            $("#loading").removeClass("hide");
+                            $.ajax({
+                                method: "POST",
+                                url: msg.structure.getContextUrl + '?oper=commit&id=' + ids,
+                                data: dataContext,
+                                dataType: 'json',
+                                success: function (msg) {
+                                    $("#loading").addClass("hide");
+                                    console.log(msg);
+                                    // alert(msg.info);
+                                    $alert(msg.info);
+
+                                },
+                                error: function (err) {
+                                    $("#loading").addClass("hide");
+                                    console.log(err);
+                                    // alert("error commit !!")
+                                    $alert("error commit !!");
+                                }
+                            });
+                        } else {
+                            // alert("Please select row !!");
+                            $alert("Please select row !!");
+                        }
+                    });
+
+
+                    $(".btnCommitJVM").on("click", function () {
+                        var dataContext = $(".formjvm").serialize();
+                        var ids = jQuery("#" + msg.structure.idTable).jqGrid('getCell', jQuery("#" + msg.structure.idTable).jqGrid('getGridParam', 'selrow'), 'id');
+
+                        if (ids != '') {
+                            $("#loading").removeClass("hide");
+                            $.ajax({
+                                method: "POST",
+                                url: msg.structure.getContextUrl + '?oper=commitJvm&id=' + ids,
+                                data: dataContext,
+                                dataType: 'json',
+                                success: function (msg) {
+                                    $("#loading").addClass("hide");
+                                    console.log(msg);
+                                    // alert(msg.info);
+                                    $alert(msg.info);
+
+                                },
+                                error: function (err) {
+                                    $("#loading").addClass("hide");
+                                    console.log(err);
+                                    // alert("error commit !!")
+                                    $alert("error commit !!");
+                                }
+                            });
+                        } else {
+                            // alert("Please select row !!");
+                            $alert("Please select row !!");
+                        }
+                    });
+
+                    $(".tbody").delegate(".fa-lock", "click", function (e) {
+                        $(".form-context").attr("readonly", false);
+                    });
+
+                    // $('.fa-lock').on('click', function () {
+                    //     $(".form-context").attr("readonly", false);
+                    // });
+
+                    $(window).bind('resize', function () {
+                        var width = $('.table-responsive').width();
+                        $('#' + msg.structure.idTable).jqGrid("setGridWidth", width);
+                    }).trigger('resize');
+
+                    $('.sidebar-toggle').on('click', function () {
+                        if ($('.main-sidebar').width() > 60) {
+                            $('#' + msg.structure.idTable).jqGrid("setGridWidth", $(window).innerWidth() - 95);
+                        } else {
+                            $('#' + msg.structure.idTable).jqGrid("setGridWidth", $(window).innerWidth() - 275);
+                        }
+                    });
+
+                    // 2 column page jqgrid
+                    $('table.ui-pager-table tbody tr').children('td:nth-child(1)').css({ "width": "auto", "text-align": "left" });
+                    $('table.ui-pager-table tbody tr').children('td:nth-child(2)').css({ "color": "#6f6f6f", 'font-size': '11px' });
+                    // end 2 column page jqgrid
+
+                });
+
+
+            } else {
+
+                // alert(msg.info);
+                $alert(msg.info);
+            }
+        },
+        error: function (msg) {
+            console.log(msg);
+        }
+    })
+}

@@ -1,0 +1,128 @@
+<style>
+dd {
+    margin-bottom: 5px;
+}
+</style>
+
+<div class="row">
+	<div class="col-md-3">
+	  <div class="box">
+		<div class="box-header with-border">
+		  <h3 class="box-title">Customer 360 Report</h3>
+		  <div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+			</button>
+			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+		  <div class="row">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-9">
+						<input type="text" id="crn" class="form-control col-md-10" list="selectedList1" placeholder="Search by CRN . . .">
+						<datalist id="selectedList1" class="listCrn">
+							
+						</datalist>
+					</div>
+					<div class="col-md-2" style="padding:0">
+						<button class="btn btn-success showData">Show</button>
+					</div>
+				</div>
+				
+				<hr/>
+				
+				<dl>
+					<dt >CRN</dt>
+					<dd class="crn-detail">...</dd>
+					<dt>Source System</dt>
+					<dd class="source_system-detail">...</dd>
+					<dt>Identity Type</dt>
+					<dd class="identity_type-detail">...</dd>
+					<dt>Identity Number</dt>
+					<dd class="identity_number-detail">...</dd>
+					<dt>Full Name</dt>
+					<dd class="full_name-detail">...</dd>
+					<dt>Date of Birth</dt>
+					<dd class="dob-detail">...</dd>
+					<dt>Phone Number</dt>
+					<dd class="phone_number-detail">...</dd>
+					<dt>Email</dt>
+					<dd class="email-detail">...</dd>
+					<dt>Office Address</dt>
+					<dd class="office_address-detail">...</dd>
+					<dt>Spouse Name</dt>
+					<dd class="spouse_name-detail">...</dd>
+					<dt>Customer Type</dt>
+					<dd class="customer_type-detail">...</dd>
+					<dt>Open Date</dt>
+					<dd class="open_date-detail">...</dd>
+				</dl>
+
+			  <!-- /.chart-responsive -->
+			</div>
+			<!-- /.col -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+		<!-- /.box-footer -->
+	  </div>
+	  <!-- /.box -->
+	</div>
+
+<!-- 0<span style="font-size:25px">M</span> -->
+
+	<div class="col-md-9">
+	
+	<div class="row">
+		<div class="col-md-4">
+		  <div class="info-box text-center" style="padding:10px; border-radius:10px">
+			<span class="info-box-text" style="font-weight:bolder">Saving Amount</span>
+			  <span class="info-box-number saving-amount" style="margin-top: 10px;font-size: 50px;color: green;">0</span>
+		  </div>
+		</div>
+		
+		<div class="col-md-4">
+		  <div class="info-box text-center" style="padding:10px; border-radius:10px">
+			<span class="info-box-text" style="font-weight:bolder">Loan Amount</span>
+			  <span class="info-box-number loan-amount" style="margin-top: 10px;font-size: 50px;color: green;">0</span>
+		  </div>
+		</div>
+		
+		<div class="col-md-4">
+		  <div class="info-box text-center" style="padding:10px; border-radius:10px">
+			<span class="info-box-text" style="font-weight:bolder">Deposit Amount</span>
+			  <span class="info-box-number deposit-amount" style="margin-top: 10px;font-size: 50px;color: green;">0</span>
+		  </div>
+		</div>
+	</div>
+
+	
+	  <div class="box">
+		<div class="box-header with-border">
+		  <h3 class="box-title">Collateral</h3>
+		  <div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+			</button>
+			<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+		  </div>
+		</div>
+		<!-- /.box-header -->
+		<div class="box-body">
+		  <div class="row">
+			<div class="col-md-12">
+				
+				<div id="colCharts" style="position: relative; height: 480px;"></div>
+			 
+			  <!-- /.chart-responsive -->
+			</div>
+			<!-- /.col -->
+		  </div>
+		  <!-- /.row -->
+		</div>
+		<!-- /.box-footer -->
+	  </div>
+	  <!-- /.box -->
+	</div>
+</div>

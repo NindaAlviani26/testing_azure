@@ -1,0 +1,39 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {{formtitle}}
+        </h3>
+    </div>
+    <div class="box-body">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Pair 2 </a> </li>
+                <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Pair 3</a></li>
+                <li><a href="#tab_3" data-toggle="tab">Pair 4</a></li>
+                <li><a href="#tab_4" data-toggle="tab">Pair more then and equals 5</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <table id="{{idTable0}}"></table>
+                    <div id="pager{{idTable0}}"></div>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_2">
+                    <table id="{{idTable1}}"></table>
+                    <div id="pager{{idTable1}}"></div>
+                </div>
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="tab_3">
+                    <table id="{{idTable2}}"></table>
+                    <div id="pager{{idTable2}}"></div>
+                </div>
+                <div class="tab-pane" id="tab_4"> 
+                    <table id="{{idTable3}}"></table> 
+                    <div id="pager{{idTable3}}"></div>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+        </div>
+    </div>
+</div>

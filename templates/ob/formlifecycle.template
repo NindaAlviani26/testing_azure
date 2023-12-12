@@ -1,0 +1,81 @@
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        
+        <div class="row">   
+            <div class="col-md-6">
+                
+                <div class="form-group">
+                    <h3 class="box-title" style="margin-right:5%;">
+                        {{form_title}}
+                    </h3>
+                    <button class="btn btn-primary addlifecycle" >Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="nav-tabs-custom">
+            
+            <label class="text-center total_row_del pull-right" id="total_row_del" style="margin-top:10px;margin-right:6px;"> </label>
+            <label class="text-center saparator pull-right" id="saparator" style="margin-top:10px;margin-right:6px;">||</label> 
+            <label class="text-center total_row pull-right" id="total_row" style="margin-top:10px;margin-right:6px;"></label>
+            
+            <ul class="nav nav-tabs"> 
+                <li class="id_tab1 active"><a href="#tab_1" data-toggle="tab" class="text-center"><b>Hold</b> </a></li>
+                <li><a href="#tab_2" data-toggle="tab" class="text-center"><b>Delete</b> </a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <table id="{{id_table}}"></table>
+                    <div id="pager{{id_table}}"></div>
+                </div>
+                <div class="tab-pane" id="tab_2">
+                    <table id="{{id_table1}}"></table>
+                    <div id="pager{{id_table1}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-primary fade" id="modallifecycle">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style='background:#365897!important'>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Add Customer Lifecycle</h4>
+            </div>
+            <div class="modal-body" style='background:none!important'>
+                <select class="form-control idinput" name="state" style="width: 100%;">
+					<option value=""></option>
+				</select>
+                <hr style='margin-top: 5px; border-top:none'>
+                <div style='display: none;' id="labeldata">
+                    <table id="list1" style='width: 100%; height: 100%; background-color: #fff; color: black; border: 1px solid #d2d6de;'></table>
+                </div>
+                <hr>
+                <input type="button" value="Hold" style='background:#365897!important; color:white' title="Hold" id="Hold" class="add-rule btn btn-default Hold">
+                <input type="button" value="Delete" title="Delete" id="Delete" class="add-rule btn btn-default Delete">
+                <br><br>
+                <div  class="holdinput" style='display: none;'>
+                    <table id="list" style='width: 100%; height: 100%; color: black;'>
+                        <td>Start Hold Date </td>
+                        <td>
+                            <input type="date" id="idate"   name="idate" class="form-control">
+                        </td>
+                        <tr>
+                        <td>Hold Duration </td>
+                        <td><input type="number" id="iduration" name="iduration" class="form-control"><br></td>
+                    </table>
+                    <hr style='margin-top: 5px; border-top:none'>
+                </div>
+            </div>
+            <div class="modal-footer" style='background:none!important'>
+                <input type="button"  style='background:#365897!important ; color:white; display:none' value="Confirm" title="Verification" id="verifikasi" class="add-rule btn btn-default">
+                <button type="button"  class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

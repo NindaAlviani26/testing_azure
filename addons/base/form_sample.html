@@ -1,0 +1,296 @@
+	<div class="box box-default">
+		<div class="box-header with-border">
+			<h3 class="box-title">
+				Judul Grid
+			</h3>
+		</div>
+		<div class="box-body"> 
+			<table id="formBFXST00410308"></table>
+			<div id="pagerformBFXST00410308"></div>
+		</div> 
+	</div> 
+    <script type="text/javascript">
+            function checklength(value, minlength) {
+                if (value.length == minlength) {
+                    return [true, "", ""];
+                } else {
+                    return [false, "Minimum Length Jam Transaksi 4", ""];
+                }
+            }
+
+            $gridformBFXST00410308 = $("#formBFXST00410308"),
+                initDateEdit = function(elem) {
+                    $(elem).datepicker({
+                        dateFormat: 'yy-mm-dd',
+                        autoSize: true,
+                        changeYear: true,
+                        changeMonth: true,
+                        showButtonPanel: true,
+                        showWeek: true
+                    });
+                },
+                initDateSearch = function(elem) {
+                    setTimeout(function() {
+                        $(elem).datepicker({
+                            dateFormat: 'yy-mm-dd',
+                            autoSize: true,
+                            changeYear: true,
+                            changeMonth: true,
+                            showWeek: true,
+                            showButtonPanel: true
+                        });
+                    }, 100);
+                };
+
+            var gridimgpath = 'themes/basic/images';
+
+            jQuery("#formBFXST00410308").jqGrid({
+                url: './addons/base/loadformdata.php?q=2&f=BFXST004&m=43&p=BFX_',
+                datatype: "json",
+                mtype: "POST",
+                cmTemplate: {
+                    editable: true,
+                    autoResizable: true
+                },
+                iconSet: "fontAwesome",
+                guiStyle: "jquery",
+				//styleUI : 'jQueryUI',
+				styleUI : 'Bootstrap',
+                colNames: ['ID Record','CIF Number','Bank Number','Branch Number','Title Before Name','CIF Name 1','CIF Name 2','Title After Name','Day Of Birth','Birth Incorporation Place','Customer Type Code','ID Type Code','ID Number','Business Unit Code','Address1','Address2','Address3','Address4','Postal Code','Mother Maiden Name','Occupation Code','Code Amount 1','Code Amount 2','Telephone','Fax','Handphone','Additional ID Type Code','Additional ID Number','Code Amount 3','ID Issue Place','Additional Address 1','Additional Address 2','Additional Address 3','Additional Address 4','Additional Postal Code','Resident Code','Sex Code','Code Field 1','Code Flag 1','Code Currency 1','Code Field 2','Code Flag 2','Code Currency 2','Code Field 3','Code Flag 3','Code Currency 3','Country Of Citizenship','UIC 2 User Defined','Employer Name','Employment Start Date','Employment End Date','Employer Industry Code','Job Designation Code','Employee Direct Superior Name 1','Employee Direct Superior Name 2','Current Salary','Previous Salary','Currency Code','Jenis Dibitur','Prefix Name','Cust Previous Name','Member Of Koperasi','Code 1','Pemilik','Lokasi','Hubungan Dengan Bank','Hubungan Keluarga','Wilayah Tgl Lahir','Rating Date','Rating Source','Rating Code','Information Date','Review Date','Status','Status XML','Notes','Remark Line 1','Remark Line 2','Remark Line 3','Remark Line 4','Status Summit Import','Status Opics Import','Date Request','User Request','Limit','Limit CCY'],
+                colModel: [{name:'IDREQ', fixed:true, index:'IDREQ', resizable:true ,align: 'right'    ,align:"right", editable:true,edittype:'text',	editrules:{required:true , integer:true    },editoptions:{size:8, maxlength:8   } , formatter: "integer", formatoptions:{decimalSeparator:".", decimalPlaces: 0} ,formoptions:{rowpos:1,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' },frozen : true},
+				{name:'CIFNumber', fixed:true, index:'CIFNumber', resizable:true ,   sorting:true, colmenu: false, columns: true, filtering: true, seraching:true, grouping:true, freeze : true , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:12, maxlength:12   } ,formoptions:{rowpos:2,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'bankNumber', fixed:true, index:'bankNumber', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:3,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'branchNumber', fixed:true, index:'branchNumber', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:4,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'titleBeforeName', fixed:true, index:'titleBeforeName', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:5,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'CIFName1', fixed:true, index:'CIFName1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:6,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'CIFName2', fixed:true, index:'CIFName2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:7,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'titleAfterName', fixed:true, index:'titleAfterName', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:8,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'dayOfBirth', fixed:true, index:'dayOfBirth', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:9,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'birthIncorporationPlace', fixed:true, index:'birthIncorporationPlace', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:10,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'customerTypeCode', fixed:true, index:'customerTypeCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:11,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'IDTypeCode', fixed:true, index:'IDTypeCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:12,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'IDNumber', fixed:true, index:'IDNumber', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:13,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'businessUnitCode', fixed:true, index:'businessUnitCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:14,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'address1', fixed:true, index:'address1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:15,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'address2', fixed:true, index:'address2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:16,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'address3', fixed:true, index:'address3', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:17,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'address4', fixed:true, index:'address4', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:18,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'postalCode', fixed:true, index:'postalCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:19,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'motherMaidenName', fixed:true, index:'motherMaidenName', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:20,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'occupationCode', fixed:true, index:'occupationCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:21,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'codeAmount1', fixed:true, index:'codeAmount1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:22,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'codeAmount2', fixed:true, index:'codeAmount2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:23,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'telephone', fixed:true, index:'telephone', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:24,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'fax', fixed:true, index:'fax', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:25,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'handphone', fixed:true, index:'handphone', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:26,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'additionalIDTypeCode', fixed:true, index:'additionalIDTypeCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:27,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'additionalIDNumber', fixed:true, index:'additionalIDNumber', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:28,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},
+				{name:'codeAmount3', fixed:true, index:'codeAmount3', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:29,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'IDIssuePlace', fixed:true, index:'IDIssuePlace', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:30,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'additionalAddress1', fixed:true, index:'additionalAddress1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:31,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'additionalAddress2', fixed:true, index:'additionalAddress2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:32,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'additionalAddress3', fixed:true, index:'additionalAddress3', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:33,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'additionalAddress4', fixed:true, index:'additionalAddress4', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:34,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'additionalPostalCode', fixed:true, index:'additionalPostalCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:35,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'residentCode', fixed:true, index:'residentCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:36,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'sexCode', fixed:true, index:'sexCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:37,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeField1', fixed:true, index:'codeField1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:38,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeFlag1', fixed:true, index:'codeFlag1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:39,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeCurrency1', fixed:true, index:'codeCurrency1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:40,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeField2', fixed:true, index:'codeField2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:41,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeFlag2', fixed:true, index:'codeFlag2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:42,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeCurrency2', fixed:true, index:'codeCurrency2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:43,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeField3', fixed:true, index:'codeField3', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:44,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeFlag3', fixed:true, index:'codeFlag3', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:45,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'codeCurrency3', fixed:true, index:'codeCurrency3', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:46,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'countryOfCitizenship', fixed:true, index:'countryOfCitizenship', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:47,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'uic2UserDefined', fixed:true, index:'uic2UserDefined', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:48,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'employerName', fixed:true, index:'employerName', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:49,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'employmentStartDate', fixed:true, index:'employmentStartDate', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:50,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'employmentEndDate', fixed:true, index:'employmentEndDate', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:51,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'employerIndustryCode', fixed:true, index:'employerIndustryCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:52,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'jobDesignationCode', fixed:true, index:'jobDesignationCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:53,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'employeeDirectSuperiorName1', fixed:true, index:'employeeDirectSuperiorName1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:54,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'employeeDirectSuperiorName2', fixed:true, index:'employeeDirectSuperiorName2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:55,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'currentSalary', fixed:true, index:'currentSalary', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:56,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'previousSalary', fixed:true, index:'previousSalary', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:57,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'currencyCode', fixed:true, index:'currencyCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:58,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'jenisDibitur', fixed:true, index:'jenisDibitur', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:59,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'prefixName', fixed:true, index:'prefixName', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:60,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'custPreviousName', fixed:true, index:'custPreviousName', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:61,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'memberOfKoperasi', fixed:true, index:'memberOfKoperasi', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:62,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'code1', fixed:true, index:'code1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:63,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'pemilik', fixed:true, index:'pemilik', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:64,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'lokasi', fixed:true, index:'lokasi', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:65,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'hubunganDenganBank', fixed:true, index:'hubunganDenganBank', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:66,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'hubunganKeluarga', fixed:true, index:'hubunganKeluarga', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:67,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'wilayahTLahir', fixed:true, index:'wilayahTLahir', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:68,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'ratingDate', fixed:true, index:'ratingDate', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:69,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'ratingSource', fixed:true, index:'ratingSource', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:70,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'ratingCode', fixed:true, index:'ratingCode', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:71,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'informationDate', fixed:true, index:'informationDate', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:72,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'reviewDate', fixed:true, index:'reviewDate', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:50, maxlength:50   } ,formoptions:{rowpos:73,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'status', fixed:true, index:'status', resizable:true ,align: 'right'    ,align:"right", editable:true,edittype:'text',	editrules:{required:true , integer:true    },editoptions:{size:4, maxlength:4   } , formatter: "integer", formatoptions:{decimalSeparator:".", decimalPlaces: 0} ,formoptions:{rowpos:74,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'statusxml', fixed:true, index:'statusxml', resizable:true ,align: 'right'    ,align:"right", editable:true,edittype:'text',	editrules:{required:true , integer:true    },editoptions:{size:1, maxlength:1   } , formatter: "integer", formatoptions:{decimalSeparator:".", decimalPlaces: 0} ,formoptions:{rowpos:75,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'notes', fixed:true, index:'notes', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:255, maxlength:255  ,rows:"3",cols:"255" } ,formoptions:{rowpos:76,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'remarkLine1', fixed:true, index:'remarkLine1', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:255, maxlength:255  ,rows:"3",cols:"255" } ,formoptions:{rowpos:77,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'remarkLine2', fixed:true, index:'remarkLine2', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:255, maxlength:255  ,rows:"3",cols:"255" } ,formoptions:{rowpos:78,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'remarkLine3', fixed:true, index:'remarkLine3', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:255, maxlength:255  ,rows:"3",cols:"255" } ,formoptions:{rowpos:79,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'remarkLine4', fixed:true, index:'remarkLine4', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:255, maxlength:255  ,rows:"3",cols:"255" } ,formoptions:{rowpos:80,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'status_summit_import', fixed:true, index:'status_summit_import', resizable:true ,align: 'right'    ,align:"right", editable:true,edittype:'text',	editrules:{required:true , integer:true    },editoptions:{size:4, maxlength:4   } , formatter: "integer", formatoptions:{decimalSeparator:".", decimalPlaces: 0} ,formoptions:{rowpos:81,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'status_opics_import', fixed:true, index:'status_opics_import', resizable:true ,align: 'right'    ,align:"right", editable:true,edittype:'text',	editrules:{required:true , integer:true    },editoptions:{size:4, maxlength:4   } , formatter: "integer", formatoptions:{decimalSeparator:".", decimalPlaces: 0} ,formoptions:{rowpos:82,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'daterequest', fixed:true, index:'daterequest', resizable:true     , editable:true,edittype:'text',	editrules:{required:true , date:true, datefmt:'dd-mm-yyyy'    },editoptions:{size:8, maxlength:12  ,dataInit:initDateEdit } ,formoptions:{rowpos:83,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'userrequest', fixed:true, index:'userrequest', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:20, maxlength:20   } ,formoptions:{rowpos:84,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'limit', fixed:true, index:'limit', resizable:true ,align: 'right'    ,align:"right", editable:true,edittype:'text',	editrules:{required:true , integer:true    },editoptions:{size:17, maxlength:17   } , formatter: "integer", formatoptions:{decimalSeparator:".", decimalPlaces: 0} ,formoptions:{rowpos:85,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }},{name:'limitccy', fixed:true, index:'limitccy', resizable:true     , editable:true,edittype:'text',	editrules:{required:true    },editoptions:{size:3, maxlength:3   } ,formoptions:{rowpos:86,colpos:1,elmprefix:'   ' ,elmsuffix:'   (*)  ' }}],
+                rowNum: 10,
+                autoResizing: {
+                    compact: true
+                },
+                rowList: [10, 20, 30, "10000:All"],
+                imgpath: gridimgpath,
+                autowidth: true,
+                pager: '#pagerformBFXST00410308',
+                toppager:true, 
+				sortname: 'IDREQ',
+                sortorder: "asc", 
+                viewrecords: true,
+                editurl: "./addons/base/saveformdata.php?f=BFXST004&m=43&p=BFX_",
+                height: "auto",
+                altRows: true,
+				rownumbers: true, 
+				forceFit : false,
+				shrinkToFit: false, 
+                toppager: true,
+                rownumbers: true, 
+				colMenu : true,
+				responsive:true,
+                autowidth: true,
+                hidegrid: true,
+				//multiselect: true, 
+                ondblClickRow: function(rowid) {
+                    $("#formBFXST00410308").jqGrid('viewGridRow', rowid, {
+                        width: 600,
+                        recreateForm: true,
+                        reloadAfterSubmit: true,
+                        jqModal: true,
+                        closeOnEscape: true,
+                        bottominfo: "Fields marked with (*) are required",
+                        processData: "Processing ..."
+                    });
+                }
+            }).jqGrid('navGrid', '#pagerformBFXST00410308' , {
+                    excel:true,
+					search: true,
+					view: true,
+                    edit: true,
+                    add: true,
+                    del: true,
+					refresh: true,
+					cloneToTop: true,
+					help: true 
+                }, {
+                    width: '600',
+                    dataheight:'360px',
+                    recreateForm: false,
+                    reloadAfterSubmit: true,
+                    closeAfterEdit: true,
+                    jqModal: true,
+                    modal: true,
+                    closeOnEscape: true,
+                    bottominfo: "Fields marked with (*) are required",
+                    processData: "Processing ...",
+                    onInitializeForm: function(formid) {	 
+                                            },
+                    beforeShowForm: function(formid) {
+                                                //$("#tr_FRNPEMINJAM",id).hide(); 
+                    },
+                    afterSubmit: function(serverResponse, xhr, postdata) {
+                        if ($.trim(serverResponse.responseText) == '0') {
+                            alert('Update Data Successfully');
+                            return [true, "", ""];
+                        }
+                        if ($.trim(serverResponse.responseText) != '0') {
+                            alert(serverResponse.responseText);
+                            return false;
+                        }
+                    }
+                }, //edit
+                {
+                    width: '600',
+                    dataheight:'360px',
+                    recreateForm: true,
+                    reloadAfterSubmit: true,
+                    checkOnSubmit: true,
+                    closeAfterAdd: true,
+                    jqModal: true,
+                    modal: true,
+                    closeOnEscape: true,
+                    bottominfo: "Fields marked with (*) are required",
+                    onInitializeForm: function(formid) {
+                                            },
+                    onclickSubmit: function(params, postdata) {
+                        return true;
+                    },
+                    afterSubmit: function(serverResponse, xhr, postdata) {
+                        if ($.trim(serverResponse.responseText) == '0') {
+                            alert('Insert Data Successfully');
+                            return [true, "", ""];
+                        }
+                        if ($.trim(serverResponse.responseText) != '0') {
+                            alert(serverResponse.responseText);
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    }
+                }, //add
+                {
+                    width: '300',
+                    dataheight:'150px',
+                    recreateForm: false,
+                    reloadAfterSubmit: true,
+                    jqModal: true,
+                    closeOnEscape: true,
+                    onclickSubmit: function(eparams) {
+                        var retarr = {}; // we can use all the grid methods here //to obtain some data 
+                        var sr = jQuery("#formBFXST00410308").jqGrid('getGridParam', 'selrow');
+                        primarykey = jQuery("#formBFXST00410308").jqGrid('getCell', jQuery("#formBFXST00410308").jqGrid('getGridParam', 'selrow'), 'IDREQ');
+                        retarr = {
+                            IDREQ: primarykey
+                        };
+                        return retarr;
+                    }
+                } //del
+                , {
+                    multipleSearch: true,
+                    multipleGroup: true,
+                    showQuery: true
+                } //Search
+                , {
+                    width: '600',
+                    dataheight:'360px',
+                    recreateForm: false,
+                    reloadAfterSubmit: true,
+                    jqModal: true,
+                    modal: true,
+                    closeOnEscape: true,
+					bottominfo: "Fields marked with (*) are required",
+                    processData: "Processing ..."
+                }, //View, 
+				{
+                    width: '600',
+                    dataheight:'360px',
+                    recreateForm: false,
+                    reloadAfterSubmit: true,
+                    jqModal: true,
+                    modal: true,
+                    closeOnEscape: true,
+                    bottominfo: "Fields marked with (*) are required",
+                    processData: "Processing ...",
+					helppdffile: './addons/doc/FinTrade_1_0.pdf',
+					helppage : 13,
+                    helptext: "'ID Record','CIF Number','Bank Number','Branch Number','Title Before Name','CIF Name 1','CIF Name 2','Title After Name','Day Of Birth','Birth Incorporation Place','Customer Type Code','ID Type Code','ID Number','Business Unit Code','Address1','Address2','Address3','Address4','Postal Code','Mother Maiden Name','Occupation Code','Code Amount 1','Code Amount 2','Telephone','Fax','Handphone','Additional ID Type Code','Additional ID Number','Code Amount 3','ID Issue Place','Additional Address 1','Additional Address 2','Additional Address 3','Additional Address 4','Additional Postal Code','Resident Code','Sex Code','Code Field 1','Code Flag 1','Code Currency 1','Code Field 2','Code Flag 2','Code Currency 2','Code Field 3','Code Flag 3','Code Currency 3','Country Of Citizenship','UIC 2 User Defined','Employer Name','Employment Start Date','Employment End Date','Employer Industry Code','Job Designation Code','Employee Direct Superior Name 1','Employee Direct Superior Name 2','Current Salary','Previous Salary','Currency Code','Jenis Dibitur','Prefix Name','Cust Previous Name','Member Of Koperasi','Code 1','Pemilik','Lokasi','Hubungan Dengan Bank','Hubungan Keluarga','Wilayah Tgl Lahir','Rating Date','Rating Source','Rating Code','Information Date','Review Date','Status','Status XML','Notes','Remark Line 1','Remark Line 2','Remark Line 3','Remark Line 4','Status Summit Import','Status Opics Import','Date Request','User Request','Limit','Limit CCY'"
+                } //Help,
+            );
+			
+			
+            //jQuery("#formBFXST00410308").jqGrid('setFrozenColumns'); 
+            //jQuery("#formBFXST00410308").jqGrid('gridResize',{minWidth:350,maxWidth:jQuery('#mainContent').innerWidth(),minHeight:80, maxHeight:550});
+
+			//jQuery('#formBFXST00410308').jqGrid('setFrozenColumns'); 
+			jQuery('#formBFXST00410308_toppager_center').remove();
+			jQuery('#formBFXST00410308_toppager_right').remove();
+			jQuery('#pagerformBFXST00410308_left').remove();
+  
+			$('#formBFXST00410308').jqGrid("navSeparatorAdd","#pg_formBFXST00410308_toppager",{
+				sepclass : 'ui-separator',sepcontent: ''
+			});
+	
+			$('#formBFXST00410308').jqGrid("navButtonAdd","#pg_formBFXST00410308_toppager",{
+				buttonicon: "glyphicon icon-libreoffice",
+				title: "Export to CSV",
+				caption: "",
+				position: "last",
+				onClickButton: exportToCSV
+			});
+			/*
+			$('#formBFXST00410308').jqGrid('navButtonAdd',"#pg_formBFXST00410308_toppager",{
+                    caption:"Export to Excel", 
+                    onClickButton : function () { 
+                        jQuery("#formBFXST00410308").excelExport();
+                    } 
+                });
+			*/							
+										
+  
+			function exportToCSV(){
+				$('#formBFXST00410308').tableExport(
+				  {
+					fileName: "formBFXST00410308",
+					type:'csv', 
+					csvEnclosure: '"',
+					csvSeparator: ',',
+					csvUseBOM: false,
+					jsonScope: 'all',
+					consoleLog:true
+				  }
+				);
+			};
+			
+            $(window).bind('resize', function() {
+                var width = $('.table-responsive').width();
+                $('#formBFXST00410308').jqGrid("setGridWidth", width);
+            }).trigger('resize');
+
+            $('.sidebar-toggle').on('click', function() { 
+                if ($('.main-sidebar').width() > 60) { 
+                    $('#formBFXST00410308').jqGrid("setGridWidth", $(window).innerWidth() - 95);
+                } else {
+                    $('#formBFXST00410308').jqGrid("setGridWidth", $(window).innerWidth() - 275);
+                }
+            });
+        </script>

@@ -1,0 +1,25 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {{form_title}}
+        </h3>
+    </div>
+    <div class="box-body">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab" class="text-center"><b>Hold</b> </a></li>
+                <li><a href="#tab_2" data-toggle="tab" class="text-center"><b>Delete</b> </a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <table id="{{id_table}}"></table>
+                    <div id="pager{{id_table}}"></div>
+                </div>
+                <div class="tab-pane" id="tab_2">
+                    <table id="{{id_table1}}"></table>
+                    <div id="pager{{id_table1}}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

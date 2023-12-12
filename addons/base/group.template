@@ -1,0 +1,49 @@
+<div class="box box-default">
+	<div class="box-header with-border">
+		<h3 class="box-title">
+			{{formtitle}}
+		</h3>
+	</div>
+	<div class="box-body"> 
+		
+		<table valign="top" id="ROLE_GROUP" class="scroll" cellpadding="0" cellspacing="0" width="100%"></table>
+		<div id="pagerROLE_GROUP" class="scroll" style="text-align:center;"></div>
+		<br/>
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="form-group row">
+					<!-- <label for="module" class="col-sm-2 col-form-label col-form-label-sm">Module</label> -->
+					<div class="col-sm-6">
+						<span class="comboModule"></span> 
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- <label> Module : </label>&nbsp;
+		<span class="comboModule"></span>  -->
+		
+		<div class="row">
+			<div class="col-md-12 mb-12">
+				<div align="center">  
+					
+					{{btnAdd}}
+					{{btnDel}}
+						
+				</div> 
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-md-6">
+				<table valign="top" id="MENUS" class="scroll" cellpadding="0" cellspacing="0" width="100%"></table>
+				<div id="pagerMENUS" class="scroll" style="text-align:center;"></div>
+					
+			</div> 
+			<div class="col-md-6">
+				<table valign="top" id="ROLE_GROUP_sub" class="scroll" cellpadding="0" cellspacing="0" width="100%"></table>
+				<div id="pagerROLE_GROUP_sub" class="scroll" style="text-align:center;"></div>
+			</div>
+		</div>
+		
+	</div>	 
+</div>

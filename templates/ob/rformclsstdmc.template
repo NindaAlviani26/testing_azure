@@ -1,0 +1,29 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {{formtitle}}
+        </h3>
+    </div>
+    <div class="box-body">
+
+        <h4>Original Data</h4>
+        <table id="{{idTable1}}"></table>
+        <div id="pager{{idTable1}}"></div>
+
+        <hr />
+
+        <h4>Cleansing Data</h4>
+        <table id="{{idTable2}}"></table>
+        <div id="pager{{idTable2}}"></div>
+        <hr />
+
+        <h4>Standardization Data</h4>
+        <table id="{{idTable3}}"></table>
+        <div id="pager{{idTable3}}"></div>
+        <hr />
+
+        <h4>Matching Data</h4>
+        <table id="{{idTable4}}"></table>
+        <div id="pager{{idTable4}}"></div>
+    </div>
+</div>

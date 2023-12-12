@@ -1,0 +1,351 @@
+<style>
+  .description-block>.description-text {
+    text-transform: uppercase;
+    font-weight: bolder;
+    font-size: 12px;
+  }
+
+  .description-block>.description-header {
+    font-size: 45px !important;
+  }
+</style>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab_1" data-toggle="tab">Dashboard 1</a></li>
+        <li><a href="#tab_2" data-toggle="tab">Dashboard 2</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border" style="background: white;">
+                  <h3 class="box-title">Monthly Recap Report</h3>
+                  <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                  </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <p class="text-center">
+                        <strong>Clean CIF Data and Total Data</strong>
+                      </p>
+                      <label for="tahun">Choose Year : </label>
+                      <select name="years" id="years">
+                      </select>
+
+                      <div class="chart">
+                        <!-- Sales Chart Canvas -->
+                        <div class="chart tab-pane active" id="chartdiv2" style="position: relative; height: 500px;"></div>
+                      </div>
+                      <!-- /.chart-responsive -->
+                    </div>
+                    <!-- /.col -->
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- ./box-body -->
+                <div class="box-footer">
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="description-block border-right">
+                        <h5 class="description-header text-green" id="count_data_cif">{{count_data_cif}}</h5>
+                        <span class="description-text">Total CIF</span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                      <div class="description-block border-right">
+                        <h5 class="description-header text-yellow" id="count_data_cif_year1">{{count_data_cif_year1}}</h5>
+                        <span class="description-text">Total cif opened on running year</span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-md-4">
+                      <div class="description-block border-right">
+                        <h5 class="description-header text-green" id="count_data_cif_year2">{{count_data_cif_year2}}</h5>
+                        <span class="description-text">Total cif opened on previous year</span>
+                      </div>
+                      <!-- /.description-block -->
+                    </div>
+
+                  </div>
+                  <!-- /.row -->
+                </div>
+                <!-- /.box-footer -->
+              </div>
+              <!-- /.box -->
+            </div>
+
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_2">
+          <div class="row">
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-aqua">
+                <div class="inner">
+                  <h3>{{process_cif}}</h3>
+                  <p>Number Of Process <br /> Cif Today</p>
+                </div>
+                <div class="icon">
+                  <!-- <i class="ion ion-person-stalker"></i> -->
+                  <i class="ion ion-android-person"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+
+              </div>
+              <!-- <center>
+                <div class="info-box p-1">
+                  <span class="info-box-text2">Total Data Process Cif</span>
+                  <h2 class="text-bold mb-0 text-aqua">{{process_cif_total}}</h2>
+                </div>
+              </center> -->
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-red">
+                <div class="inner">
+                  <h3>{{rejected_record}}</h3>
+                  <p>Number Of Rejected <br />Record Today</p>
+                </div>
+                <div class="icon">
+                  <!-- <i class="ion ion-ios-list"></i> -->
+                  <i class="ion ion ion-close"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+
+              </div>
+              <!-- <center>
+                <div class="info-box p-1">
+                  <span class="info-box-text2">Total Data Rejected Record</span>
+                  <h2 class="text-bold mb-0 text-red">{{rejected_record_total}}</h2>
+                </div>
+              </center> -->
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-yellow ">
+                <div class="inner">
+                  <h3>{{invalid_record}}</h3>
+                  <p>Number Of Invalid <br />Record Today</p>
+                </div>
+                <div class="icon">
+                  <!-- <i class="ion ion-android-checkbox-outline"></i> -->
+                  <i class="ion ion ion ion-alert"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+
+              </div>
+              <!-- <center>
+                <div class="info-box p-1">
+                  <span class="info-box-text2">Total Data Invalid Record</span>
+                  <h2 class="text-bold mb-0 text-yellow">{{invalid_record_total}}</h2>
+                </div>
+              </center> -->
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-xs-6">
+              <!-- small box -->
+              <div class="small-box bg-green">
+                <div class="inner">
+                  <h3>{{unique_customer}}</h3>
+                  <p>Total Of Unique <br />Customer Today</p>
+                </div>
+                <div class="icon">
+                  <!-- <i class="ion ion-pie-graph"></i> -->
+                  <i class="ion ion-android-people"></i>
+                </div>
+                <!-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+
+              </div>
+              <!-- <center>
+                <div class="info-box p-1">
+                  <span class="info-box-text2">Total Of Unique Customer</span>
+                  <h2 class="text-bold mb-0 text-green">{{unique_customer_total}}</h2>
+                </div>
+              </center> -->
+            </div>
+            <!-- ./col -->
+
+            <!-- Left col -->
+            <section class="col-lg-9 connectedSortable">
+              <!-- Custom tabs (Charts with tabs)-->
+              <div class="nav-tabs-custom">
+                <!-- Tabs within a box -->
+                <ul class="nav nav-tabs pull-right">
+                  <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
+                  <li class="pull-left header"><i class="fa fa-line-chart"></i> Number of on boarding / day (per month)</li>
+                </ul>
+                <div class="tab-content no-padding">
+                  <!-- Morris chart - Sales -->
+                  <!-- <div class="chart tab-pane active" id="revenue-chart" style="position: relative; height: 364px;"></div> -->
+                  <div class="chart tab-pane active" id="chartdiv" style="position: relative; height: 364px;"></div>
+                </div>
+              </div>
+              <!-- /.nav-tabs-custom -->
+
+
+              <!-- TO DO List 
+              <div class="box box-primary">
+                <div class="box-header">
+                  <i class="ion ion-clipboard"></i>
+
+                  <h3 class="box-title">To Do List</h3>
+
+                  <div class="box-tools pull-right">
+                    <ul class="pagination pagination-sm inline">
+                      <li><a href="#">&laquo;</a></li>
+                      <li><a href="#">1</a></li>
+                      <li><a href="#">2</a></li>
+                      <li><a href="#">3</a></li>
+                      <li><a href="#">&raquo;</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="box-body">
+                  <ul class="todo-list">
+                    <li>
+                          <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                          </span>
+                      <input type="checkbox" value="">
+                      <span class="text">Akan take case 2 deduplication individual besok</span>
+                      <small class="label label-danger"><i class="fa fa-clock-o"></i> 2 mins</small>
+                      <div class="tools">
+                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-trash-o"></i>
+                      </div>
+                    </li>
+                    <li>
+                          <span class="handle">
+                            <i class="fa fa-ellipsis-v"></i>
+                            <i class="fa fa-ellipsis-v"></i>
+                          </span>
+                      <input type="checkbox" value="">
+                      <span class="text">Customer Ade Sulaeman itu adalah orang yang sama !!</span>
+                      <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
+                      <div class="tools">
+                        <i class="fa fa-edit"></i>
+                        <i class="fa fa-trash-o"></i>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div class="box-footer clearfix no-border">
+                  <button type="button" class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
+                </div>
+              </div>
+              -->
+
+
+            </section>
+            <!-- /.Left col -->
+            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+            <section class="col-lg-3 connectedSortable">
+
+              <!-- Info Boxes Style 2 -->
+              <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="ion ion-android-person"></i></span>
+
+                <div class="info-box-content">
+                  <p class="info-box-text2">Total Data <br /> <span class="text-bold">Process Cif</span></p>
+                  <h3 class="text-bold mb-0 " style="margin-top:0">{{process_cif_total}}</h3>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+              <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="ion ion ion-close"></i></span>
+
+                <div class="info-box-content">
+                  <p class="info-box-text2">Total Data <br /> <span class="text-bold">Rejected Record</span></p>
+                  <h3 class="text-bold mb-0 " style="margin-top:0">{{rejected_record_total}}</h3>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <!-- /.info-box -->
+              <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="ion ion ion ion-alert"></i></span>
+
+                <div class="info-box-content">
+                  <p class="info-box-text2">Total Data <br /><span class="text-bold">Invalid Record</span></p>
+                  <h3 class="text-bold mb-0 " style="margin-top:0">{{invalid_record_total}}</h3>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+              <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="ion ion-android-people"></i></span>
+
+                <div class="info-box-content">
+                  <p class="info-box-text2">Total Of <br /><span class="text-bold">Unique Customer</span></p>
+                  <h3 class="text-bold mb-0 " style="margin-top:0">{{unique_customer_total}}</h3>
+                </div>
+                <!-- /.info-box-content -->
+              </div>
+            </section>
+            <!-- <section class="col-lg-3 connectedSortable"> -->
+
+            <!-- Info Boxes Style 2 -->
+            <!-- <div class="info-box">
+                <span class="info-box-icon"><i class="ion ion-backspace"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Data Number Of Process Cif Today</span>
+                  <span class="info-box-number">{{reject_today_total}}</span>
+                </div> -->
+            <!-- /.info-box-content -->
+            <!-- </div> -->
+            <!-- /.info-box -->
+            <!-- <div class="info-box">
+                <span class="info-box-icon"><i class="ion ion-ios-list"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Data Number Of Rejected Record Today</span>
+                  <span class="info-box-number">{{batch_today_total}}</span>
+                </div> -->
+            <!-- /.info-box-content -->
+            <!-- </div> -->
+            <!-- /.info-box -->
+            <!-- <div class="info-box">
+                <span class="info-box-icon"><i class="ion ion-person-stalker"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Data Number Of Invalid Record Today</span>
+                  <span class="info-box-number">{{cif_total}}</span>
+                </div> -->
+            <!-- /.info-box-content -->
+            <!-- </div>
+              <div class="info-box">
+                <span class="info-box-icon"><i class="ion ion-person"></i></span>
+
+                <div class="info-box-content">
+                  <span class="info-box-text">Total Of Unique Customer Today</span>
+                  <span class="info-box-number">{{cif_ob_total}}</span>
+                </div> -->
+            <!-- /.info-box-content -->
+          </div>
+          <!-- </section> -->
+          <!-- right col -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- /.row (main row) -->
+<script src="plugins/chart.js/ChartV2-9-3.min.js"></script>
+<script src="plugins/chart.js/2.4.0/randomColor.js"></script>
+<script src="plugins/chart.js/2.4.0/utils.js"></script>

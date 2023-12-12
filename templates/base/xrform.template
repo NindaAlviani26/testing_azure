@@ -1,0 +1,11 @@
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title" id="navTitle">
+           {{form_title}} 
+        </h3>
+    </div>
+    <div class="box-body">
+        <table id="{{table_name}}"></table>
+        <div id="pager{{table_name}}"></div>
+	</div>	 
+</div> 

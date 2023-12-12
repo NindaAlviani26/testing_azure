@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Combo Bar-Line Chart</title>
+    <script src="../Chart.bundle.js"></script>
+    <script src="../randomColor.js"></script>
+    <script src="utils.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div style="width: 70%">
+        <canvas id="canvas"></canvas>
+    </div> 
+    <script>
+//var jsonData = '{"product":"Spot", data:[{rank:1,label:"ASTRA INTERNATIONAL",value:80000},{rank:2,label:"WILMAR NABATI INDONESIA",value:20998}]},{product:"Tom", data:[{rank:1,label:"ASTRA INTERNATIONAL",value:80000},{rank:2,label:"WILMAR NABATI INDONESIA",value:20998}]}';
+
+
+var xx = [];
+var dd = { "product":"Spot", "data": [
+{"rank":"1","label":"ASTRA INTERNATIONAL","value":"80000"},
+{"rank":"2","label":"WILMAR NABATI INDONESIA","value":"20998"},
+{"rank":"3","label":"PERMATA HIJAU PALM OLEO","value":"14400"},
+{"rank":"4","label":"NAGAMAS PALMOIL LESTARI","value":"5500"},
+{"rank":"5","label":"ASIA MAKMUR","value":"1000"},
+{"rank":"6","label":"SAT NUSAPERSADA","value":"350"},
+{"rank":"7","label":"SOUTH SUCO","value":"200"},
+{"rank":"8","label":"CYGNET PERICON","value":"130"},
+{"rank":"9","label":"KAPUAS BESAR","value":"50"},
+{"rank":"10","label":"KOMODITAS JAYA MAKMUR","value":"25"}]};
+
+var dd1 = { "product":"Tom", "data": [
+{"rank":"1","label":"NAGAMAS PALMOIL LESTARI","value":17100.000000},
+{"rank":"2","label":"PERMATA HIJAU PALM OLEO","value":13300.000000},
+{"rank":"3","label":"BALI MASPINTJINRA","value":6894.971500},
+{"rank":"4","label":"PETROKIMIA GRESIK","value":6871.000000},
+{"rank":"5","label":"PRAWIRA VALAS","value":5594.221400},
+{"rank":"6","label":"DARMEX AGRO","value":5500.510670},
+{"rank":"7","label":"BATANGHARI TEBING PRATAMA","value":4582.661350},
+{"rank":"8","label":"DIRGAHAYU VALUTA PRIMA","value":4427.000000},
+{"rank":"9","label":"BALI MERDEKA INDAH","value":1933.000000},
+{"rank":"10","label":"ASIA MAKMUR","value":1500.000000}
+]};
+
+var dd2 = { "product":"Tod", "data": [
+{"rank":"1","label":"X NAGAMAS PALMOIL LESTARI","value":17100.000000},
+{"rank":"2","label":"X PERMATA HIJAU PALM OLEO","value":13300.000000},
+{"rank":"3","label":"X BALI MASPINTJINRA","value":6894.971500},
+{"rank":"4","label":"PX ETROKIMIA GRESIK","value":6871.000000},
+{"rank":"5","label":"X PRAWIRA VALAS","value":5594.221400},
+{"rank":"6","label":"X DARMEX AGRO","value":5500.510670},
+{"rank":"7","label":"X BATANGHARI TEBING PRATAMA","value":4582.661350},
+{"rank":"8","label":"X DIRGAHAYU VALUTA PRIMA","value":4427.000000},
+{"rank":"9","label":"X BALI MERDEKA INDAH","value":1933.000000},
+{"rank":"10","label":"X ASIA MAKMUR","value":1500.000000}
+]};
+
+var dd3 = { "product":"Fwd", "data": [
+{"rank":"1","label":"Y NAGAMAS PALMOIL LESTARI","value":17100.000000},
+{"rank":"2","label":"Y PERMATA HIJAU PALM OLEO","value":13300.000000},
+{"rank":"3","label":"Y BALI MASPINTJINRA","value":6894.971500},
+{"rank":"4","label":"PEY TROKIMIA GRESIK","value":6871.000000},
+{"rank":"5","label":"Y PRAWIRA VALAS","value":5594.221400},
+{"rank":"6","label":"Y DARMEX AGRO","value":5500.510670},
+{"rank":"7","label":"Y BATANGHARI TEBING PRATAMA","value":4582.661350},
+{"rank":"8","label":"Y DIRGAHAYU VALUTA PRIMA","value":4427.000000},
+{"rank":"9","label":"Y BALI MERDEKA INDAH","value":1933.000000},
+{"rank":"10","label":"Y ASIA MAKMUR","value":1500.000000}
+]};
+ 
+xx.push(dd);
+xx.push(dd1); 
+xx.push(dd2); 
+xx.push(dd3); 
+
+var json = JSON.stringify(xx, null, "");  
+var obj = JSON.parse(json); 
+//prod = obj.product;
+var xLabels=[];
+var xDataSet=[];
+var xColor=[];
+
+//Set Color
+for(i=0;i<obj.length;i++){ 
+  x=randomColor({hue: 'random',luminosity: 'light',count: 54});
+  xColor.push(x[0]);
+} 
+
+//Set Label
+for(j=0;j<obj[0].data.length;j++){ 
+  xLabels.push(obj[0].data[j].rank);
+}
+
+for(i=0;i<obj.length;i++){ 
+   var datas="";
+   var xData=[];   
+   var xLabel=[];
+   for(j=0;j<obj[i].data.length;j++){  
+		xData.push(obj[i].data[j].value);
+		xLabel.push(obj[i].data[j].label);
+   }
+    
+   datas={ label: obj[i].product, backgroundColor:xColor[i] , "labels": xLabel, "data":xData};
+   xDataSet.push(datas);
+}	  
+	
+var ctx = document.getElementById("canvas").getContext('2d'); 
+var myChart = new Chart(ctx, {
+  type: 'bar', 
+  tooltipFillColor: "rgba(0,0,0,0.8)",                
+  options: {	responsive: true,
+                    title: {
+                        display: true,
+                        text: 'Lastest Product Ranking 1-10'
+                    }, 
+                tooltips: {
+                    callbacks: {
+                        title: function (tooltipItem, data) {  
+						//alert(tooltipItems.yLabel);
+						return 'Rank : ' + data.labels[tooltipItem[0].index] ; },
+                        label: function (tooltipItem, data) {
+                            var amount = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                            var total = eval(data.datasets[tooltipItem.datasetIndex].data.join("+"));
+                            return data.datasets[tooltipItem.datasetIndex].labels[tooltipItem.index]+ ' => ' + amount + ' / ' + total + ' ( ' + parseFloat(amount * 100 / total).toFixed(2) + '% )';
+                        },
+                        //footer: function(tooltipItem, data) { return 'Total: 100 planos.'; }
+                    }
+                },
+            },
+  data: {
+	fill: false,
+    borderWidth: 2,
+    labels: xLabels,
+	datasets: xDataSet
+	/*
+    datasets: [{
+      label: 'Spot',
+      backgroundColor: "rgba(153,255,51,1)",
+	  labels: ["ASTRA INTERNATIONAL","WILMAR NABATI INDONESIA","PERMATA HIJAU PALM OLEO","NAGAMAS PALMOIL LESTARI","ASIA MAKMUR","SAT NUSAPERSADA","SOUTH SUCO","CYGNET PERICON","KAPUAS BESAR","KOMODITAS JAYA MAKMUR"],
+      data: [80000.000000, 20998.005000, 14400.000000, 5500.000000, 1000.000000, 350.000000, 200.000000, 130.000000, 50.000000, 25.000000],
+    }, {
+      label: 'Tom',
+      backgroundColor: "rgb(21, 114, 243)",
+      labels: ["NAGAMAS PALMOIL LESTARI","PERMATA HIJAU PALM OLEO","BALI MASPINTJINRA","PETROKIMIA GRESIK","PRAWIRA VALAS","DARMEX AGRO","BATANGHARI TEBING PRATAMA","DIRGAHAYU VALUTA PRIMA","BALI MERDEKA INDAH","ASIA MAKMUR"],data: [17100.000000, 13300.000000, 6894.346330, 6871.356240, 5594.971500, 5500.000000, 4582.221400, 4427.510670, 1933.661350, 1500.000000],
+    }, {
+      label: 'Tod',
+      backgroundColor: "rgb(250, 169, 55)",
+      labels: ["INTIBENUA PERKASATAMA","JHONLIN GROUP","NEWMONT NUSA TENGGARA","DARMEX AGRO","KAYAN PUTRA UTAMA COAL","HWA SEUNG INDONESIA","MAYORA INDAH","DISTRIBUSI SENTRA JAYA","TORABIKA EKA SEMESTA","PETROCHINA INTERNATIONAL INDONESIA"],
+      data: [17100.000000, 13300.000000, 6894.346330, 6871.356240, 5594.971500, 5500.000000, 4582.221400, 4427.510670, 1933.661350, 1500.000000],
+    }, {
+      label: 'Fwd',
+      labels: ["PERMATA HIJAU PALM OLEO","NAGAMAS PALMOIL LESTARI","MUSIM MAS","INTIBENUA PERKASATAMA","HOK TONG","ASIA MAKMUR","PINAGO UTAMA","HASIL BUMI RAYA MANDIRI","SUNAN RUBBER","CIPTA KRIDA TAMA"],
+      backgroundColor: "rgba(236, 43, 124, 0.4)",
+      data: [17100.000000, 13300.000000, 6894.346330, 6871.356240, 5594.971500, 5500.000000, 4582.221400, 4427.510670, 1933.661350, 1500.000000],
+    }]
+	*/
+  }
+}); 
+var caption = document.getElementById("caption");
+ 
+    </script>
+</body>
+
+</html>

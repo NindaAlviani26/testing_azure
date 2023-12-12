@@ -1,0 +1,248 @@
+<script type="text/javascript">
+// function getForm(urlServer){
+    $.ajax({
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('Authorization', "Bearer "+sessionStorage.token);
+        },
+        url : serverHost+'addons/ob/dashboard.api',
+        dataType : "json",
+        method : "GET",
+        success : function(msg){
+        	if(msg.status == "success"){
+                $.get("./templates/ob/dashboard.template", function(data){
+                    var template = data.replaceAll("{{cif_ob}}", msg.structure.cif_ob);
+                    template = template.replaceAll("{{batch_today}}", msg.structure.batch_today);
+                    template = template.replaceAll("{{reject_today}}", msg.structure.reject_today);
+                    template = template.replaceAll("{{cif}}", msg.structure.cif);
+                    template = template.replaceAll("{{reject_today_total}}", msg.structure.reject_today_total);
+                    template = template.replaceAll("{{batch_today_total}}", msg.structure.batch_today_total);
+                    template = template.replaceAll("{{cif_total}}", msg.structure.cif_total);
+                    template = template.replaceAll("{{cif_ob_total}}", msg.structure.cif_ob_total);
+                    $("#mainContent").html(template);
+
+                    /*
+					 * Author: Abdullah A Almsaeed
+					 * Date: 4 Jan 2014
+					 * Description:
+					 *      This is a demo file used only for the main dashboard (index.html)
+					 **/
+
+					$(function () {
+
+					"use strict";
+
+					//Make the dashboard widgets sortable Using jquery UI
+					$(".connectedSortable").sortable({
+					  placeholder: "sort-highlight",
+					  connectWith: ".connectedSortable",
+					  handle: ".box-header, .nav-tabs",
+					  forcePlaceholderSize: true,
+					  zIndex: 999999
+					});
+					$(".connectedSortable .box-header, .connectedSortable .nav-tabs-custom").css("cursor", "move");
+
+					//jQuery UI sortable for the todo list
+					$(".todo-list").sortable({
+					  group: 'nested',
+					  animation: 150,
+					  fallbackOnBody: true,
+					  swapThreshold: 0.65
+					});
+
+					//bootstrap WYSIHTML5 - text editor
+					$(".textarea").wysihtml5();
+
+					$('.daterange').daterangepicker({
+					  ranges: {
+					    'Today': [moment(), moment()],
+					    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+					    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+					    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+					    'This Month': [moment().startOf('month'), moment().endOf('month')],
+					    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+					  },
+					  startDate: moment().subtract(29, 'days'),
+					  endDate: moment()
+					}, function (start, end) {
+					  window.alert("You chose: " + start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+					});
+
+					/* jQueryKnob */
+					$(".knob").knob();
+
+					//jvectormap data
+					var visitorsData = {
+					  "US": 398, //USA
+					  "SA": 400, //Saudi Arabia
+					  "CA": 1000, //Canada
+					  "DE": 500, //Germany
+					  "FR": 760, //France
+					  "CN": 300, //China
+					  "AU": 700, //Australia
+					  "BR": 600, //Brazil
+					  "IN": 800, //India
+					  "GB": 320, //Great Britain
+					  "RU": 3000 //Russia
+					};
+					//World map by jvectormap
+					$('#world-map').vectorMap({
+					  map: 'world_mill_en',
+					  backgroundColor: "transparent",
+					  regionStyle: {
+					    initial: {
+					      fill: '#e4e4e4',
+					      "fill-opacity": 1,
+					      stroke: 'none',
+					      "stroke-width": 0,
+					      "stroke-opacity": 1
+					    }
+					  },
+					  series: {
+					    regions: [{
+					      values: visitorsData,
+					      scale: ["#92c1dc", "#ebf4f9"],
+					      normalizeFunction: 'polynomial'
+					    }]
+					  },
+					  onRegionLabelShow: function (e, el, code) {
+					    if (typeof visitorsData[code] != "undefined")
+					      el.html(el.html() + ': ' + visitorsData[code] + ' new visitors');
+					  }
+					});
+
+					//Sparkline charts
+					var myvalues = [1000, 1200, 920, 927, 931, 1027, 819, 930, 1021];
+					$('#sparkline-1').sparkline(myvalues, {
+					  type: 'line',
+					  lineColor: '#92c1dc',
+					  fillColor: "#ebf4f9",
+					  height: '50',
+					  width: '80'
+					});
+					myvalues = [515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921];
+					$('#sparkline-2').sparkline(myvalues, {
+					  type: 'line',
+					  lineColor: '#92c1dc',
+					  fillColor: "#ebf4f9",
+					  height: '50',
+					  width: '80'
+					});
+					myvalues = [15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21];
+					$('#sparkline-3').sparkline(myvalues, {
+					  type: 'line',
+					  lineColor: '#92c1dc',
+					  fillColor: "#ebf4f9",
+					  height: '50',
+					  width: '80'
+					});
+
+					//The Calender
+					$("#calendar").datepicker();
+
+					//SLIMSCROLL FOR CHAT WIDGET
+					$('#chat-box').slimScroll({
+					  height: '250px'
+					});
+
+					/* Morris.js Charts */
+					// Sales chart
+					var area = new Morris.Area({
+					  element: 'revenue-chart',
+					  resize: true,
+					  data: [
+					    {y: '2018 Q1', item1: 2666},
+					    {y: '2018 Q2', item1: 2778},
+					    {y: '2018 Q3', item1: 4912},
+					    {y: '2018 Q4', item1: 3767},
+					    {y: '2019 Q1', item1: 6810},
+					    {y: '2019 Q2', item1: 5670},
+					    {y: '2019 Q3', item1: 4820},
+					    {y: '2019 Q4', item1: 15073},
+					    {y: '2020 Q1', item1: 10687},
+					    {y: '2020 Q2', item1: 8432}
+					  ],
+					  xkey: 'y',
+					  ykeys: ['item1'],
+					  labels: ['Data Deduplication', 'Item 2'],
+					  lineColors: ['#3c8dbc', '#3c8dbc'],
+					  hideHover: 'auto'
+					});
+
+
+					//Fix for charts under tabs
+					$('.box ul.nav a').on('shown.bs.tab', function () {
+					  area.redraw();
+					});
+
+					/* The todo list plugin */
+					$(".todo-list").todolist({
+					  onCheck: function (ele) {
+					    window.console.log("The element has been checked");
+					    return ele;
+					  },
+					  onUncheck: function (ele) {
+					    window.console.log("The element has been unchecked");
+					    return ele;
+					  }
+					});
+
+					});
+
+
+					(function ($) {
+
+					'use strict';
+
+					$.fn.todolist = function (options) {
+					  // Render options
+					  var settings = $.extend({
+					    //When the user checks the input
+					    onCheck: function (ele) {
+					      return ele;
+					    },
+					    //When the user unchecks the input
+					    onUncheck: function (ele) {
+					      return ele;
+					    }
+					  }, options);
+
+					  return this.each(function () {
+
+					    if (typeof $.fn.iCheck != 'undefined') {
+					      $('input', this).on('ifChecked', function () {
+					        var ele = $(this).parents("li").first();
+					        ele.toggleClass("done");
+					        settings.onCheck.call(ele);
+					      });
+
+					      $('input', this).on('ifUnchecked', function () {
+					        var ele = $(this).parents("li").first();
+					        ele.toggleClass("done");
+					        settings.onUncheck.call(ele);
+					      });
+					    } else {
+					      $('input', this).on('change', function () {
+					        var ele = $(this).parents("li").first();
+					        ele.toggleClass("done");
+					        if ($('input', ele).is(":checked")) {
+					          settings.onCheck.call(ele);
+					        } else {
+					          settings.onUncheck.call(ele);
+					        }
+					      });
+					    }
+					  });
+					};
+					}(jQuery));
+
+                });
+            }else{
+            	alert(msg.info);
+            }
+        },
+        error : function(msg){
+        	console.log(msg);
+        }
+    });
+// }
+</script>

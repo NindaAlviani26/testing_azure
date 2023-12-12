@@ -1,0 +1,88 @@
+
+<div class="box box-default">
+    <div class="box-header with-border">
+        <h3 class="box-title">
+            {{formtitle}}
+        </h3>
+    </div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <form id="formGenerate">
+                    <div class="form-group row">
+                        <label for="idPelapor" class="col-sm-4 col-form-label">Id Pelapor </label>
+                        <div class="col-sm-8">
+                            <span class="comboBranch"></span>
+                            <!-- <input type="text" class="form-control" name="idPelapor" id="idPelapor"> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="periodeData" class="col-sm-4 col-form-label">Periode Data </label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="periodeData" id="periodeData">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="periodeLaporan" class="col-sm-4 col-form-label">Periode Laporan </label>
+                        <div class="col-sm-8">
+                            <select class="form-control select-special" name="periodeLaporan" id="periodeLaporan">
+                                <option value="">__Please Select__</option>
+                                <option value="A">A - Tahunan</option>
+                                <option value="M">M - Bulanan</option>
+                                <option value="D">D - Harian</option>
+                                <option value="Q">Q - Triwulan</option>
+                                <option value="S">S - Semesteran</option>
+                                <option value="W">W - Mingguan</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="form-group row">
+                        <label for="statusFile" class="col-sm-4 col-form-label">File Status</label>
+                        <div class="col-sm-8">
+                            <select class="form-control select-special" name="statusFile" id="statusFile">
+                                <option value="">__Please Select__</option>
+                                <option value="failFo">failFo</option>
+                                <option value="failXt">failXt</option>
+                                <option value="failVD">failVD</option>
+                                <option value="failVs">failVs</option>
+                                <option value="failMv">failMv</option>
+                                <option value="failWD">failWD</option>
+                                <option value="failWk">failWk</option>
+                                <option value="failIn">failIn</option>
+                                <option value="failSy">failSy</option>
+                                <option value="ready">ready</option>
+                                <option value="erFind">erFind</option>
+                                <option value="erBulk">erBulk</option>
+                                <option value="erRvCR">erRvCR</option>
+                                <option value="erInRo">erInRo</option>
+                                <option value="errRow">errRow</option>
+                                <option value="errUpd">errUpd</option>
+                                <option value="posted">posted</option>
+                            </select>
+                        </div>
+                    </div> 
+
+                   <!--  <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8 small">
+                        Fields marked with (<span class="text-danger">*</span>) are required
+                        </div>
+                    </div> -->
+                    <div class="form-group row">
+                        <input type="text" name="trigerForm" value="trigerForm" hidden>
+                        <label class="col-sm-4 col-form-label"></label>
+                        <div class="col-sm-8">
+                            <button type="button" class="btn btn-primary"  name="btnSubmit" id="btnSubmit" ><i class="fa fa-search"></i> Search</button>
+                        </div>
+                    </div>
+                </form>
+            </div>  
+        </div>
+        <div >
+            <table id="{{idTable}}"></table>
+            <div id="pager{{idTable}}"></div>
+            </div>
+        </div>	
+    </div> 
+</div>
