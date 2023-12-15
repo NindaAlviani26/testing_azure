@@ -13,7 +13,7 @@ variables:
   dockerRegistryServiceConnection: '01e38605-96ad-4ff6-bfa2-9a235aa651c2'
   imageRepository: 'mdmtest'
   containerRegistry: 'frontendmdm.azurecr.io'
-  dockerfilePath: '$(build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: 'Dockerfile'
   tag: '$(Build.BuildId)'
 
   # Agent VM image name
